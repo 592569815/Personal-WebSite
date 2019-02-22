@@ -1,0 +1,17 @@
+{
+    "name": "person-website-api",
+    "version": "1.0.0",
+    "description": "MySQL+express",
+    "main": "index.js",
+    "scripts": {},
+    "devDependencies": {},
+    "author": "coyle",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.17.2",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.15.4",
+        "express-session": "^1.15.5",
+        "mysql": "^2.16.0"
+    }
+}
