@@ -17,12 +17,12 @@ let open= function () {
 
 module.exports = {
     // 获取国家数据
-    getCountryData(data, callback) {
+    async getCountryData(data, callback) {
         open();
 
         let condition = 'SELECT * FROM country';
         let totalCount = '';
-        sql.query(condition, function(err, results) {
+        await sql.query(condition, function(err, results) {
             let responseData = {
                 status: '',
                 msg: '',
@@ -36,12 +36,13 @@ module.exports = {
                 responseData.msg = '查询成功';
                 totalCount = results.length;
                 if (results.length > 0) {
-                    // results.forEach(function(element, i) {
-                    //     responseData.data.dataList[i].code = element.Code;
-                    //     responseData.data.dataList[i].cn = element.ChineseName;
-                    //     responseData.data.dataList[i].en = element.EnglishName;
-                    // });
-                    responseData.data.dataList = results
+                    responseData.data.dataList = results.map(item => {
+                        let obj = {};
+                        obj['code'] = item.Code;
+                        obj['cn'] = item.ChineseName;
+                        obj['en']= item.EnglishName;
+                        return obj
+                    })
                     responseData.data.dataMeta.totalCount = totalCount
 
                     callback(responseData);
