@@ -17,23 +17,23 @@ let open= function () {
 
 module.exports = {
     // 获取国家数据
-    async getCountryData(data, callback) {
+    getCountryData(data, callback) {
         open();
 
         let condition = 'SELECT * FROM country';
         let totalCount = '';
-        await sql.query(condition, function(err, results) {
+        sql.query(condition, function(err, results) {
             let responseData = {
-                status: '',
-                msg: '',
+                code: '',
+                message: '',
                 data: {
                     dataList: [],
                     dataMeta: {},
                 }
             }
             if (!err) {
-                responseData.status = true;
-                responseData.msg = '查询成功';
+                responseData.code = 1;
+                responseData.message = '查询成功';
                 totalCount = results.length;
                 if (results.length > 0) {
                     responseData.data.dataList = results.map(item => {
@@ -51,12 +51,17 @@ module.exports = {
                     callback(responseData);
                 }
             } else {
-                responseData.status = false;
-                responseData.msg = '查询失败！原因'+ err;
+                responseData.code = 0;
+                responseData.message = '查询失败！原因'+ err;
                 callback(responseData);
             }
             sql.end();
 		});
-    }
+    },
+    // async getSkuInfo(data, callback) {
+    //     open();
+
+    //     let condition = '';
+    // }
 }
 

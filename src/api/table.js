@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+
+export function getAllCountry() {
+  return request({
+    url: 'api/getAllCountry',
+    method: 'get'
+  })
+}
