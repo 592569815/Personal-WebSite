@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
+import { loginByUsername, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -17,6 +17,9 @@ const user = {
   },
 
   mutations: {
+    SET_USER: (state, user) => {
+      state.user = user
+    },
     SET_CODE: (state, code) => {
       state.code = code
     },
@@ -52,6 +55,7 @@ const user = {
           const data = response.data
           console.log('token', data.token)
           commit('SET_TOKEN', data.token)
+          commit('SET_USER', username)
           setToken(response.data.token)
           resolve()
         }).catch(error => {
@@ -63,9 +67,9 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        console.log('获取信息')
-        getUserInfo(state.token).then(response => {
-          console.log('res', response)
+        console.log('state', state)
+        getUserInfo(state.user).then(response => {
+          console.log('res', response.data)
           // 由于mockjs 不支持自定义状态码只能这样hack
           if (!response.data) {
             reject('Verification failed, please login again.')
@@ -103,18 +107,18 @@ const user = {
     // },
 
     // 登出
-    LogOut({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          removeToken()
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
+    // LogOut({ commit, state }) {
+    //   return new Promise((resolve, reject) => {
+    //     logout(state.token).then(() => {
+    //       commit('SET_TOKEN', '')
+    //       commit('SET_ROLES', [])
+    //       removeToken()
+    //       resolve()
+    //     }).catch(error => {
+    //       reject(error)
+    //     })
+    //   })
+    // },
 
     // 前端 登出
     FedLogOut({ commit }) {

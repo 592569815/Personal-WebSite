@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function getAllCountry() {
   return request({
-    url: 'api/getAllCountry',
+    url: 'api/table/country',
     method: 'get'
   })
 }

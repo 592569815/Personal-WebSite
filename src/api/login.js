@@ -7,24 +7,24 @@ export function loginByUsername(username, password) {
   }
 
   return request({
-    url: '/account/login',
+    url: 'api/account/login',
     method: 'post',
     data
   })
 }
 
-export function logout() {
-  return request({
-    url: '/login/logout',
-    method: 'post'
-  })
-}
+// export function logout() {
+//   return request({
+//     url: '/login/logout',
+//     method: 'post'
+//   })
+// }
 
-export function getUserInfo(token) {
+export function getUserInfo(user) {
   return request({
-    url: '/user/info',
+    url: 'api/account/info',
     method: 'get',
-    params: { token }
+    params: { user }
   })
 }
 
