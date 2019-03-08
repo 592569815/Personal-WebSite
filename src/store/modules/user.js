@@ -1,4 +1,4 @@
-import { loginByUsername, getUserInfo } from '@/api/login'
+import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -8,8 +8,7 @@ const user = {
     code: '',
     token: getToken(),
     name: '',
-    avatar: '',
-    introduction: '',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
     roles: [],
     setting: {
       articlePlatform: []
@@ -25,9 +24,6 @@ const user = {
     },
     SET_TOKEN: (state, token) => {
       state.token = token
-    },
-    SET_INTRODUCTION: (state, introduction) => {
-      state.introduction = introduction
     },
     SET_SETTING: (state, setting) => {
       state.setting = setting
@@ -66,9 +62,9 @@ const user = {
 
     // 获取用户信息
     GetUserInfo({ commit, state }) {
+      console.log('userstate', state)
       return new Promise((resolve, reject) => {
-        console.log('state', state)
-        getUserInfo(state.user).then(response => {
+        getUserInfo(state.token).then(response => {
           console.log('res', response.data)
           // 由于mockjs 不支持自定义状态码只能这样hack
           if (!response.data) {
@@ -81,10 +77,8 @@ const user = {
           } else {
             reject('getInfo: roles must be a non-null array!')
           }
-
           commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_AVATAR', data.imgurl)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -107,18 +101,18 @@ const user = {
     // },
 
     // 登出
-    // LogOut({ commit, state }) {
-    //   return new Promise((resolve, reject) => {
-    //     logout(state.token).then(() => {
-    //       commit('SET_TOKEN', '')
-    //       commit('SET_ROLES', [])
-    //       removeToken()
-    //       resolve()
-    //     }).catch(error => {
-    //       reject(error)
-    //     })
-    //   })
-    // },
+    LogOut({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        logout(state.token).then(() => {
+          commit('SET_TOKEN', '')
+          commit('SET_ROLES', [])
+          removeToken()
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
 
     // 前端 登出
     FedLogOut({ commit }) {
@@ -138,8 +132,7 @@ const user = {
           const data = response.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_AVATAR', data.imgurl)
           dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
           resolve()
         })

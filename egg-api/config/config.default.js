@@ -11,8 +11,7 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = {};
-  config.formatResponse = {};
-  config.erpToken = '95CB22A5-9C5F-4B05-C02B-20EA539CFE46';
+  config.erpToken = 'admin';
   config.redis = {
     client: {
         port: 6379,
@@ -24,22 +23,11 @@ module.exports = appInfo => {
   };
   config.sequelize = {
     dialect: 'mysql',
-    database: 'test', // newdb
-    username: 'sa',
-    password: 'Idh#168',
-    host: '192.168.1.210',
-    timezone: '+8:00',
+    database: 'qdm114473233_db', // newdb
+    username: 'qdm114473233',
+    password: 'cyq19940802',
+    host: 'qdm114473233.my3w.com',
     port: 3306,
-    operatorsAliases: false,
-    quoteIdentifiers: false,
-    pool: {
-        max: 20,
-        min: 2,
-        idle: 90000,
-        acquire: 90000,
-        evict: 90000
-    },
-    logging: false
   };
   config.sessionRedis = {};
   config.session = {
@@ -55,7 +43,7 @@ module.exports = appInfo => {
         cookieName: 'csrfToken', // Cookie 中的字段名，默认为 csrfToken
         sessionName: 'csrfToken', // Session 中的字段名，默认为 csrfToken
         enable: false,
-        ignoreJSON: true
+        ignoreJSON: false
     },
 };
 
@@ -64,6 +52,7 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = ["myCors", "formatResponse"];
+  config.formatResponse = {}; // 定义的中间件配置
 
   // add your user config here
   const userConfig = {

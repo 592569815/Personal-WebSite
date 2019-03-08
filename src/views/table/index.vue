@@ -21,7 +21,7 @@
           {{ scope.row.cn }}
         </template>
       </el-table-column>
-      <el-table-column :label="$('table.code')" align="center">
+      <el-table-column :label="$t('table.code')" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.code }}</span>
         </template>

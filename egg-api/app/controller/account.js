@@ -23,14 +23,14 @@ class AccountController extends Controller {
                         password
                     };
                     await ctx.logout();
-                    const token = await app.erpToken();
+                    // const token = await app.erpToken();
                     where.name = prm.username;
                     let user = await app.model.User.findOne({
                         where
                     });
                     if (user) {
                         user = JSON.parse(JSON.stringify(user));
-                        user.token = token;
+                        user.token = user.roles;
                         await ctx.login(JSON.parse(JSON.stringify(user)));
                         await app.redis.setex("user:" + user.id, 60 * 60 * 24, ctx.session._sessCtx.externalKey);
                         ctx.session.maxAge = ms('2h');
@@ -58,6 +58,27 @@ class AccountController extends Controller {
         try {
             ctx.logout();
             ctx.formatResponse.body = "ok";
+            const body = ctx.formatResponse.formattedRes();
+            ctx.body = body;
+        } catch (error) {
+            throw error;
+        }
+    }
+    // 获取用户信息
+    async getUserInfo () {
+        const { ctx, app } = this;
+        try {
+            const prm = ctx.formatResponse.prm;
+            let where = {
+                roles: prm.token
+            };
+            let userInfo = await app.model.User.findOne({
+                where
+            })
+            let roles = []
+            roles.push(userInfo.roles)
+            userInfo.roles = roles;
+            ctx.formatResponse.body = userInfo;
             const body = ctx.formatResponse.formattedRes();
             ctx.body = body;
         } catch (error) {

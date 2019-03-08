@@ -4,29 +4,32 @@
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon" :title="onlyOneChild.meta.title" />
+          <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon" :title="generateTitle(onlyOneChild.meta.title)" />
         </el-menu-item>
       </app-link>
     </template>
 
-    <el-submenu v-else :index="resolvePath(item.path)">
+    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)">
       <template slot="title">
-        <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
+        <item v-if="item.meta" :icon="item.meta.icon" :title="generateTitle(item.meta.title)" />
       </template>
 
-      <template v-for="child in item.children" v-if="!child.hidden">
-        <sidebar-item
-          v-if="child.children&&child.children.length>0"
-          :is-nest="true"
-          :item="child"
-          :key="child.path"
-          :base-path="resolvePath(child.path)"
-          class="nest-menu" />
-        <app-link v-else :to="resolvePath(child.path)" :key="child.name">
-          <el-menu-item :index="resolvePath(child.path)">
-            <item v-if="child.meta" :icon="child.meta.icon" :title="child.meta.title" />
-          </el-menu-item>
-        </app-link>
+      <template v-for="child in item.children">
+        <template v-if="!child.hidden">
+          <sidebar-item
+            v-if="child.children&&child.children.length>0"
+            :is-nest="true"
+            :item="child"
+            :key="child.path"
+            :base-path="resolvePath(child.path)"
+            class="nest-menu" />
+
+          <app-link v-else :to="resolvePath(child.path)" :key="child.name">
+            <el-menu-item :index="resolvePath(child.path)">
+              <item v-if="child.meta" :icon="child.meta.icon" :title="generateTitle(child.meta.title)" />
+            </el-menu-item>
+          </app-link>
+        </template>
       </template>
     </el-submenu>
 
@@ -35,13 +38,16 @@
 
 <script>
 import path from 'path'
+import { generateTitle } from '@/utils/i18n'
 import { isExternal } from '@/utils/validate'
 import Item from './Item'
 import AppLink from './Link'
+import FixiOSBug from './FixiOSBug'
 
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
+  mixins: [FixiOSBug],
   props: {
     // route object
     item: {
@@ -88,14 +94,13 @@ export default {
       return false
     },
     resolvePath(routePath) {
-      if (this.isExternalLink(routePath)) {
+      if (isExternal(routePath)) {
         return routePath
       }
       return path.resolve(this.basePath, routePath)
     },
-    isExternalLink(routePath) {
-      return isExternal(routePath)
-    }
+
+    generateTitle
   }
 }
 </script>

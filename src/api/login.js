@@ -13,18 +13,18 @@ export function loginByUsername(username, password) {
   })
 }
 
-// export function logout() {
-//   return request({
-//     url: '/login/logout',
-//     method: 'post'
-//   })
-// }
-
-export function getUserInfo(user) {
+export function logout() {
   return request({
-    url: 'api/account/info',
+    url: 'api/account/logout',
+    method: 'post'
+  })
+}
+
+export function getUserInfo(token) {
+  return request({
+    url: 'api/account/getUserInfo',
     method: 'get',
-    params: { user }
+    params: { token }
   })
 }
 

@@ -17,7 +17,7 @@ module.exports = {
         return await crypto.createHmac("sha256", user_id).update(password).digest("hex");
     },
     async erpToken() {
-        return this.config.erpToken || "95CB22A5-9C5F-4B05-C02B-20EA539CFE46";
+        return this.config.erpToken || "admin";
     },
     // 格式化时间
     dateFormat(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
