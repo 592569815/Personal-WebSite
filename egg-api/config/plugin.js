@@ -8,7 +8,7 @@ module.exports = {
   // }
   static: true,
   sequelize: {
-    enable: true,
+    enable: false,
     package: 'egg-sequelize',
   },
   sessionRedis: {
@@ -27,4 +27,8 @@ module.exports = {
       enable: true,
       package: 'egg-passport',
   },
+  mysql:{
+    enable: true,
+    package: 'egg-mysql',
+  }
 };

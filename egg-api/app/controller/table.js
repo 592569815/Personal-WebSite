@@ -5,7 +5,11 @@ class TableController extends Controller {
     async getAllCountry () {
         const { ctx, app } = this;
         try {
-            const list = await app.model.Country.findAll();
+            // const list = await app.model.Country.findAll();
+            let opt = {
+                
+            }
+            let list = await ctx.services.table.findCountry(opt)
             let newList = list.map(itm => {
                 var o = {};
                 o['code'] = itm.code;

@@ -23,11 +23,29 @@ module.exports = appInfo => {
   };
   config.sequelize = {
     dialect: 'mysql',
-    database: 'qdm114473233_db', // newdb
-    username: 'qdm114473233',
-    password: 'cyq19940802',
-    host: 'qdm114473233.my3w.com',
+    database: 'qdm189967263_db', // newdb
+    username: 'qdm189967263',
+    password: 'Cyq19940802',
+    host: 'qdm189967263.my3w.com',
     port: 3306,
+    dialectOptions: {
+      insecureAuth: true
+    }
+  };
+  config.mysql = {
+    client: {
+      // host
+      host: 'qdm189967263.my3w.com',
+      // 端口号
+      port: '3306',
+      // 用户名
+      user: 'qdm189967263',
+      // 密码
+      password: 'Cyq19940802',
+      // 数据库名
+      database: 'qdm189967263_db',
+      insecureAuth: true, 
+    },
   };
   config.sessionRedis = {};
   config.session = {
