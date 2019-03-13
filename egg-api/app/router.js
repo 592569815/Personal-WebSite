@@ -9,5 +9,5 @@ module.exports = app => {
   router.post('/api/account/login', controller.account.login);
   router.post('/api/account/logout', controller.account.logout);
   router.get('/api/account/getUserInfo', controller.account.getUserInfo);
-  router.get('/api/table/country', controller.table.getAllCountry);
+  router.post('/api/table/country', controller.table.getAllCountry);
 };

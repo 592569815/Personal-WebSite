@@ -296,3 +296,66 @@ export function createUniqueString() {
   const randomNum = parseInt((1 + Math.random()) * 65536) + ''
   return (+(randomNum + timestamp)).toString(32)
 }
+
+/**
+ * 将'key1.key2'形式的字符串分隔成['key1','key2']的数组
+ * @param value {string}
+ * @returns {array}
+ */
+export function splitByDot(value) {
+  if (value) {
+    return value.split('.')
+  } else {
+    return []
+  }
+}
+
+/**
+ * 通过字符串对object多层取值,字符串为'key1.key2'的形式
+ * @param obj {object} 目标对象
+ * @param keyString {string} 形为'key1.key2'的字符串
+ * @returns {*}
+ */
+export function getValByKey(obj, keyString) {
+  let result = obj
+  const keyArray = splitByDot(keyString)
+  const len = keyArray.length
+  if (len > 0) { // 如果key存在,则取对应的值,否则将原对象返回
+    keyArray.forEach((key, index) => {
+      if (typeof result[key] === 'undefined' || result[key] === null) {
+        if (index === len - 1) {
+          result[key] = null
+        } else {
+          result[key] = {}
+        }
+      }
+      result = result[key]
+    })
+  }
+  return result
+}
+
+/**
+ * 通过字符串对object多层设值,字符串为'key1.key2'的形式
+ * @param obj {object} 目标对象
+ * @param keyString {string} 要设置值的key,形为'key1.key2'的字符串
+ * @param val {*} 需要设置的值
+ */
+export function setValByKey(obj, keyString, val) {
+  let current = obj
+  const keyArray = splitByDot(keyString)
+  const len = keyArray.length
+
+  if (len > 0) {
+    keyArray.forEach((key, index) => {
+      if (len === 1) { // 如果为单层,则直接设置
+        obj[key] = val
+      } else { // 否则在最后一层设置值,以保持对象的引用
+        if (index === len - 1) {
+          current[key] = val
+        }
+        current = current[key]
+      }
+    })
+  }
+}

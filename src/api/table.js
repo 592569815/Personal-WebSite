@@ -8,9 +8,15 @@ export function getList(params) {
   })
 }
 
-export function getAllCountry() {
+export function getAllCountry(pageIndex, pageSize, condition) {
+  const data = {
+    pageIndex,
+    pageSize,
+    condition
+  }
   return request({
     url: 'api/table/country',
-    method: 'get'
+    method: 'post',
+    data
   })
 }

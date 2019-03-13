@@ -14,10 +14,10 @@ module.exports = appInfo => {
   config.erpToken = 'admin';
   config.redis = {
     client: {
-        port: 6379,
-        password: '',
-        host: '127.0.0.1',
-        db: 0
+      port: 6379,
+      password: '',
+      host: '127.0.0.1',
+      db: 0
     },
     agent: true
   };
@@ -49,21 +49,21 @@ module.exports = appInfo => {
   };
   config.sessionRedis = {};
   config.session = {
-      renew: true,
+    renew: true,
   };
   config.security = {
     domainWhiteList: [ 'http://localhost:9528' ],
     xframe: {
-        enable: false,
+      enable: false,
     },
     csrf: {
-        useSession: true, // 默认为 false，当设置为 true 时，将会把 csrf token 保存到 Session 中
-        cookieName: 'csrfToken', // Cookie 中的字段名，默认为 csrfToken
-        sessionName: 'csrfToken', // Session 中的字段名，默认为 csrfToken
-        enable: false,
-        ignoreJSON: false
+      useSession: true, // 默认为 false，当设置为 true 时，将会把 csrf token 保存到 Session 中
+      cookieName: 'csrfToken', // Cookie 中的字段名，默认为 csrfToken
+      sessionName: 'csrfToken', // Session 中的字段名，默认为 csrfToken
+      enable: false,
+      ignoreJSON: false
     },
-};
+  };
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1551680486214_5621';

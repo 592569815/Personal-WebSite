@@ -24,8 +24,8 @@ module.exports = {
     package: 'egg-cors',
   },
   passport: {
-      enable: true,
-      package: 'egg-passport',
+    enable: true,
+    package: 'egg-passport',
   },
   mysql:{
     enable: true,

@@ -160,5 +160,8 @@ export default {
     close: 'Close',
     closeOthers: 'Close Others',
     closeAll: 'Close All'
+  },
+  tip: {
+    switchLangSuccess: 'Switch Language Success'
   }
 }

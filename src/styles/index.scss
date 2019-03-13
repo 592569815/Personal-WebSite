@@ -76,3 +76,360 @@ a:hover {
 .app-container {
   padding: 20px;
 }
+
+/*搜索组件开始*/
+.search_component {
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 2px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  input {
+    outline: none;
+  }
+  .default_condition {
+    min-height: 26px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    .el-input {
+      margin-right: 10px;
+      input::-webkit-input-placeholder {
+        color: #758494;
+      }
+      input:-moz-placeholder {
+        color:#758494;
+      }
+      input::-moz-placeholder {
+        color:#758494;
+      }
+      input:-ms-input-placeholder {
+        color:#758494;
+      }
+      // 获取焦点时的颜色
+      input:focus::-webkit-input-placeholder {
+        color: #ccc;
+      }
+      input:focus:-moz-placeholder {
+        color: #ccc;
+      }
+      input:focus::-moz-placeholder {
+        color: #ccc;
+      }
+      input:focus:-ms-input-placeholder {
+        color: #ccc;
+      }
+    }
+    .el-input__inner {
+      height: 26px;
+      line-height: 24px;
+      border: 1px solid #A8AAB7;
+      border-radius: 2px;
+      padding: 0 7px;
+      font-size: 12px;
+      color: #758494;
+    }
+    .search_btn {
+      width: 62px;
+      height: 26px;
+      padding: 0;
+      span {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+        color: #fff;
+        font-size: 12px;
+      }
+    }
+    .el-select {
+      // width: 104px;
+      height: 26px;
+      margin-right: 10px;
+      .el-input__inner {
+        line-height: 24px;
+        background: #FFFFFF;
+        border: 1px solid #A8AAB7;
+        border-radius: 2px;
+      }
+      .el-input__suffix {
+        right: 0;
+        .el-input__icon {
+          color: #758494;
+          font-size: 12px;
+          line-height: 24px;
+        }
+      }
+    }
+    .search_group {
+      height: 26px;
+      .el-select {
+        height: 26px;
+        width: 98px;
+        margin: 0;
+        vertical-align: top;
+        .el-input__inner {
+            line-height: 26px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+      }
+      > .el-input {
+        height: 26px;
+        .el-input__inner {
+          line-height: 24px;
+          border-left: none;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+    .time_tange {
+      width: 300px;
+      margin-right: 10px;
+      .el-date-editor {
+        .el-input__icon {
+          color: #5968AC;
+          font-size: 20px;
+        }
+        .el-range__close-icon {
+          display: none;
+        }
+        .el-range-input {
+          width: 45%;
+          font-size: 12px;
+        }
+        input::-webkit-input-placeholder {
+          color: #758494;
+          padding-left: 20px;
+          text-align: left;
+        }
+        input:-moz-placeholder {
+          color:#758494;
+          padding-left: 20px;
+          text-align: left;
+        }
+        input::-moz-placeholder {
+          color:#758494;
+          padding-left: 20px;
+          text-align: left;
+        }
+        input:-ms-input-placeholder {
+          color:#758494;
+          padding-left: 20px;
+          text-align: left;
+        }
+        // 获取焦点时的颜色
+        input:focus::-webkit-input-placeholder {
+          color: #ccc;
+        }
+        input:focus:-moz-placeholder {
+          color: #ccc;
+        }
+        input:focus::-moz-placeholder {
+          color: #ccc;
+        }
+        input:focus:-ms-input-placeholder {
+          color: #ccc;
+        }
+      }
+    }
+  }
+  .selected_condition {
+    // height: 34px;
+    padding-top: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    .selected_item {
+      height: 26px;
+      border: 1px solid #5E6DB3;
+      border-radius: 2px;
+      font-size: 12px;
+      color: #5E6DB3;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-right: 10px;
+      .selected_item_label {
+        margin-right: 5px;
+      }
+      .guanbi {
+        width: 13px;
+        height: 13px;
+        line-height: 14px;
+        text-align: center;
+        color: #fff;
+        background-color: #FF0000;
+        font-size: 9px;
+        position: absolute;
+        top: -6px;
+        right: -7px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+    }
+    .cleanAll {
+      line-height: 26px;
+      font-size: 12px;
+      color: #FF0000;
+      margin-left: 10px;
+    }
+  }
+}
+/*搜索组件结束*/
+
+/*分页组件开始*/
+.pagination_box {
+  position: fixed;
+  right: 20px;
+  bottom: 0;
+  display: flex;
+  height: 50px;
+  padding-top: 10px;
+  justify-content: flex-end;
+  background-color: #fff;
+  z-index: 999;
+  transition: all 0.2s linear;
+  border-top: 1px solid #ccc;
+  .el-pagination {
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #DFE3E9;
+    font-weight: normal;
+    &.br_n {
+      border-right: none;
+    }
+    &.bd_n {
+      border: none;
+    }
+    &.part_one {
+      background: #fff;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      .first_page {
+        display: flex;
+        height: 100%;
+        select {
+          width: 50px;
+          outline:none;
+          height: 100%;
+          border: none;
+          font-size: 12px;
+          color: #252525;
+        }
+        button {
+          width: 50px;
+          border-left: 1px solid #DFE3E9;
+          border-right: 1px solid #DFE3E9;
+        }
+      }
+      button {
+        width: 60px;
+        font-size: 14px;
+        padding: 0;
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+    &.part_two {
+      margin-right: 18px;
+      .el-pager {
+        border: 1px solid #DFE3E9;
+        border-right: none;
+        background-color: #fff;
+        li {
+          width: 44px;
+          font-size: 14px;
+          color: #282F36;
+          border-right: 1px solid #DFE3E9;
+          &.active {
+            color: #5E6DB3;
+          }
+          &:hover {
+            color: #5E6DB3;
+          }
+        }
+      }
+      button {
+        height: 30px;
+        width: 60px;
+        padding: 0;
+        border: 1px solid #DFE3E9;
+        border-left: none;
+        background-color: #fff;
+        span {
+          font-size: 14px;
+        }
+      }
+      .operate {
+        display: flex;
+        align-items: center;
+        .last_page {
+          width: 50px;
+          font-size: 14px;
+          overflow: hidden;
+          &：hover {
+            color: #5E6DB3!important;
+          }
+        }
+        .page_total {
+          min-width: 40px;
+          height: 30px;
+          line-height: 28px;
+          text-align: center;
+          font-size: 14px;
+          border: 1px solid #DFE3E9;
+          border-left: none;
+          padding: 0 5px;
+        }
+        .total {
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+        }
+        .empty {
+          height: 30px;
+          width: 18px;
+          background-color: #fff;
+        }
+        input {
+          width: 50px;
+          height: 30px;
+          outline: none;
+          border: 1px solid #DFE3E9;
+          font-size: 14px;
+          color: #252525;
+          padding-left: 5px!important;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+        }
+        button {
+          width: 40px;
+          height: 30px;
+          font-size: 14px;
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+        }
+        .to_top {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          color: #252525;
+          cursor: pointer;
+          background: #eee;
+          border: 1px solid #DFE3E9;
+          border-radius: 4px 2px 2px 4px;
+        }
+      }
+    }
+  }
+}
+/*分页组件结束*/
