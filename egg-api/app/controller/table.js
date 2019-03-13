@@ -6,11 +6,21 @@ class TableController extends Controller {
     const { ctx, app } = this;
     try {
       const prm = this.ctx.formatResponse.prm;
+      console.log('prm', prm)
       const offset = this.ctx.formatResponse.skip;
       const limit = this.ctx.formatResponse.pageSize;
       const where = {};
-      const searchType = ['countryEn', 'countryCn', 'code'];
-      console.log('prm', prm)
+      // 参数处理
+      if (prm.conditions.length > 0) {
+        for (let condition of prm.conditions) {
+          switch (condition.name) {
+            case 'searchType':
+            switch (condition.val) {
+              
+            }
+          }
+        }
+      }
       if (prm.keyword && searchType.includes(prm.searchType)) {
         prm.keyword = prm.keyword.replace(/，/g, ",");
         let isBlurry = true;
@@ -38,6 +48,7 @@ class TableController extends Controller {
       } else if ((!prm.keyword && prm.searchType) || (prm.keyword && !prm.searchType)) {
         throw new Error("参数错误");
       }
+
       // 获取数据
       const list = await ctx.service.table.findCountry({
         limit,
@@ -47,8 +58,7 @@ class TableController extends Controller {
             ['code', 'asc']
         ]
       });
-      // const list = await app.model.Country.findAll();
-      // let list = await ctx.service.table.findCountry()
+
       // 数据组装
       let newList = list.map(itm => {
         var o = {};
@@ -59,6 +69,7 @@ class TableController extends Controller {
         o['updateTime'] = app.dateFormat(itm.updateTime);
         return o;
       })
+
       // 格式化数据
       ctx.formatResponse.list = newList;
       const body = ctx.formatResponse.formattedRes();
