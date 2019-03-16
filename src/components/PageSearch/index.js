@@ -310,7 +310,7 @@ export default {
           return <div class='selected_item'>
             <span class='selected_item_label'>{ item.label }:</span>
             {dataType(item)}
-            <i class='iconfont icon-fontAwesome_remove guanbi' on-click = { () => this.closeItem(item.model, item.defaultType) }></i>
+            <svg-icon icon-class='close' class='guanbi' on-click = { () => this.closeItem(item.model, item.defaultType) }></svg-icon>
           </div>
         })
       } else {

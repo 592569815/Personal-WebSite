@@ -29,7 +29,10 @@
         <div class="empty"></div>
         <input v-model="toPage" type="text">
         <button @click="toTargetPage">go</button>
-        <svg-icon icon-class="goTop" />
+        <div class="to_top">
+          <svg-icon icon-class="goTop" />
+        </div>
+        
       </div>
     </el-pagination>
   </div>

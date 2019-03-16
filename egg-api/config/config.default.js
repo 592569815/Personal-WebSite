@@ -23,14 +23,11 @@ module.exports = appInfo => {
   };
   config.sequelize = {
     dialect: 'mysql',
-    database: 'qdm189967263_db', // newdb
-    username: 'qdm189967263',
+    database: 'test', // 
+    username: 'root',
     password: 'Cyq19940802',
-    host: 'qdm189967263.my3w.com',
-    port: 3306,
-    dialectOptions: {
-      insecureAuth: true
-    }
+    host: 'rm-wz9282q8h24jq6j159o.mysql.rds.aliyuncs.com',
+    port: 3306
   };
   config.mysql = {
     client: {

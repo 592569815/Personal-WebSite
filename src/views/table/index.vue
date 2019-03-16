@@ -36,7 +36,7 @@
     <!-- 分页 -->
     <pg-pagination
       slot="pagination"
-      :currentPage="pageIndex"
+      :current-page="pageIndex"
       :page-size="pageSize"
       :total="total"
       @size-change="sizeChange"
@@ -58,22 +58,12 @@ export default {
     return {
       // 搜索数据
       query: {
-        pageIndex: 1,
-        pageSize: 20,
         keyword: '',
-        code: '', // 国家简码
-        countryEn: '', // 英文国家名称
-        countryCn: '', // 中文国家名称
         searchType: 'code' // 下拉按钮组默认展示的选项
       },
       // 搜索数据（默认）
       initQuery: {
-        pageIndex: 1,
-        pageSize: 20,
         keyword: '',
-        code: '', // 国家简码
-        countryEn: '', // 英文国家名称
-        countryCn: '', // 中文国家名称
         searchType: 'code' // 下拉按钮组默认展示的选项
       },
       pageIndex: 1, // 当前页数
@@ -84,14 +74,11 @@ export default {
       total: 0 // 数据总个数
     }
   },
-  created() {
-    this.fetchData()
-  },
   computed: {
     // 配置筛选菜单
     defaultQuery: {
       get() {
-        return [ 
+        return [
           {
             type: 'group',
             text: 'text',
@@ -119,6 +106,9 @@ export default {
       }
     }
   },
+  created() {
+    this.fetchData()
+  },
   methods: {
     // 获取列表数据
     fetchData() {
@@ -134,35 +124,30 @@ export default {
     },
     // 生成搜索条件
     buildConditionsData() {
-      this.conditions = [];
+      this.conditions = []
       Object.keys(this.query).forEach((key) => {
-        if (this.query[key] !== this.initQuery[key]) {
-          if ((typeof this.query[key] === 'string' && this.query[key].trim() === '') || key === 'searchtype') {
-            return;
-          }
-          if (key === 'keyword') {
+        if (key === 'keyword') {
+          this.conditions.push({
+            name: 'keyword',
+            value: this.query[key]
+          })
+        } else if (key === 'time') {
+          if (this.query[key] && this.query[key].length === 2) {
             this.conditions.push({
-              name: this.query.searchType,
-              value: this.query[key]
-            })
-          } else if(key === 'time') {
-            if (this.query[key] && this.query[key].length === 2) {
-              this.conditions.push({
-                name: 'datetimeType',
-                value: this.query['datetimeType']
-              })
-            }
-          } else if(key === 'dateBegin' || key === 'dateEnd') {
-              this.conditions.push({
-                name: key,
-                value: this.query[key]
-              })
-          } else {
-            this.conditions.push({
-              name: key,
-              value: this.query[key]
+              name: 'datetimeType',
+              value: this.query['datetimeType']
             })
           }
+        } else if (key === 'dateBegin' || key === 'dateEnd') {
+          this.conditions.push({
+            name: key,
+            value: this.query[key]
+          })
+        } else {
+          this.conditions.push({
+            name: key,
+            value: this.query[key]
+          })
         }
       })
     },
@@ -172,12 +157,13 @@ export default {
       this.update()
     },
     // 更新数据
-    update () {
+    update() {
       this.buildConditionsData()
       this.fetchData()
     },
     // 清除单项
     cleanSearchItem(model) {
+      console.log('model', model)
       this.query[model] = cloneDeep(this.initQuery[model])
     },
     // 清除全部
@@ -187,15 +173,15 @@ export default {
     },
     // 分页数更改
     sizeChange(size) {
-      this.pageSize = size;
-      this.pageIndex = 1;
-      this.update();
+      this.pageSize = size
+      this.pageIndex = 1
+      this.update()
     },
     // 页码更新触发
     currentChange(current) {
-      this.pageIndex = current;
-      this.update();
-    },
+      this.pageIndex = current
+      this.update()
+    }
   }
 }
 </script>

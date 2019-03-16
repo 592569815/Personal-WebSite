@@ -10,57 +10,51 @@ class TableController extends Controller {
       const offset = this.ctx.formatResponse.skip;
       const limit = this.ctx.formatResponse.pageSize;
       const where = {};
+      let msg = '';
+
       // 参数处理
-      if (prm.conditions.length > 0) {
-        for (let condition of prm.conditions) {
+      if (prm.condition.length > 0) {
+        for (let condition of prm.condition) {
           switch (condition.name) {
             case 'searchType':
-            switch (condition.val) {
-              
-            }
-          }
-        }
-      }
-      if (prm.keyword && searchType.includes(prm.searchType)) {
-        prm.keyword = prm.keyword.replace(/，/g, ",");
-        let isBlurry = true;
-        if (prm.keyword.search(',') > 0) {
-          isBlurry = false;
-        }
-        if (prm.searchType) {
-          if (!isBlurry) {
-            const keywordArr = prm.keyword.split(",");
-            const newKeywordArr = [];
-            keywordArr.map(li => {
-              if (li) {
-                newKeywordArr.push(li);
+              switch (condition.value) {
+                case 'code':
+                  if (prm.condition.filter(x => { x.name === 'keyword' && x.value !== '' })) {
+                    where.code = { [Op.like]: '%' + prm.condition.find(x => { if (x.name === 'keyword') return x }).value + '%' };
+                  }
+                  break;
+                case 'countryEn':
+                  if (prm.condition.filter(x => { x.name === 'keyword' && x.value !== '' })) {
+                    where.englishName = { [Op.like]: '%' + prm.condition.find(x => { if (x.name === 'keyword') return x }).value + '%' } ;
+                  }
+                  break;
+                case 'countryCn':
+                  if (prm.condition.filter(x => { x.name === 'keyword' && x.value !== '' })) {
+                    where.chineseName = { [Op.like]: '%' + prm.condition.find(x => { if (x.name === 'keyword') return x }).value + '%'  } ;
+                  }
+                  break;
+                default:
+                  msg = '找不到参数，请求失败';
               }
-            });
-            where[prm.searchType] = {
-              [Op.in]: newKeywordArr
-            };
-          } else {
-            where[prm.searchType] = {
-              [Op.like]: `%${prm.keyword}%`
-            };
-          }
+              break;
+          } 
         }
-      } else if ((!prm.keyword && prm.searchType) || (prm.keyword && !prm.searchType)) {
-        throw new Error("参数错误");
       }
+
+      console.log('where', where)
 
       // 获取数据
       const list = await ctx.service.table.findCountry({
         limit,
         offset,
         where,
-        orders: [
+        order: [
             ['code', 'asc']
         ]
-      });
+      }); 
 
       // 数据组装
-      let newList = list.map(itm => {
+      let newList = list.dataList.map(itm => {
         var o = {};
         o['code'] = itm.code;
         o['cn'] = itm.chineseName;
@@ -72,6 +66,7 @@ class TableController extends Controller {
 
       // 格式化数据
       ctx.formatResponse.list = newList;
+      ctx.formatResponse.count = list.count;
       const body = ctx.formatResponse.formattedRes();
       ctx.body = body;
     } catch (error) {

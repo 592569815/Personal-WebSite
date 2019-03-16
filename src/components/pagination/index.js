@@ -29,7 +29,7 @@ export default {
       type: Object,
       default() {
         return {
-          min: 66,
+          min: 56,
           max: 180
         }
       }
@@ -40,18 +40,18 @@ export default {
     }
   },
   watch: {
-    // isCollapse(newVal) {
-    //   if (newVal) {
-    //     this.positionLeft = this.positionData.min
-    //   } else {
-    //     this.positionLeft = this.positionData.max
-    //   }
-    // }
+    'sidebar.opened'(newVal) {
+      if (newVal) {
+        this.positionLeft = this.positionData.max
+      } else {
+        this.positionLeft = this.positionData.min
+      }
+    }
   },
   computed: {
-    // ...mapGetters([
-    //   'isCollapse'
-    // ]),
+    ...mapGetters([
+      'sidebar'
+    ]),
     pageSizesVal: {
       get() {
         return this.pageSize
@@ -71,7 +71,7 @@ export default {
     }
   },
   mounted() {
-    // this.positionLeft = this.isCollapse ? this.positionData.min : this.positionData.max
+    this.positionLeft = this.sidebar.opened ? this.positionData.max : this.positionData.min
   },
   methods: {
     // 页码改变

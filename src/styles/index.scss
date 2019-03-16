@@ -256,6 +256,7 @@ a:hover {
         margin-right: 5px;
       }
       .guanbi {
+        padding: 1px;
         width: 13px;
         height: 13px;
         line-height: 14px;
@@ -350,10 +351,10 @@ a:hover {
           color: #282F36;
           border-right: 1px solid #DFE3E9;
           &.active {
-            color: #5E6DB3;
+            color: $menuActiveText;
           }
           &:hover {
-            color: #5E6DB3;
+            color: $menuActiveText;
           }
         }
       }
@@ -375,6 +376,7 @@ a:hover {
           width: 50px;
           font-size: 14px;
           overflow: hidden;
+          cursor: pointer;
           &：hover {
             color: #5E6DB3!important;
           }
@@ -410,6 +412,7 @@ a:hover {
           border-bottom-left-radius: 2px;
         }
         button {
+          cursor: pointer;
           width: 40px;
           height: 30px;
           font-size: 14px;
@@ -418,8 +421,6 @@ a:hover {
         }
         .to_top {
           display: inline-block;
-          width: 30px;
-          height: 30px;
           line-height: 30px;
           text-align: center;
           color: #252525;
