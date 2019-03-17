@@ -32,7 +32,6 @@
         <div class="to_top">
           <svg-icon icon-class="goTop" />
         </div>
-        
       </div>
     </el-pagination>
   </div>
