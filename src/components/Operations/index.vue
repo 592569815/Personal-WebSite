@@ -21,6 +21,7 @@
         </el-select>
         <!-- 按钮 -->
         <el-button
+          v-waves
           v-if="!btn.type"
           :style="{width: btn.width+'px'}"
           :type="btn.type"
@@ -33,9 +34,11 @@
     </template>
   </div>
 </template>
-<script type="text/babel">
+<script>
 import index from './index.js'
+import waves from '@/directive/waves'
 export default {
+  directives: { waves },
   ...index
 }
 </script>
