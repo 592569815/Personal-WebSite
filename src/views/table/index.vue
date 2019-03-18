@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 页面搜索 -->
     <PageSearch
       slot="search-form"
       ref="search"
@@ -10,6 +11,12 @@
       @cleanSearchItem="cleanSearchItem"
       @cleanSearchAll="cleanSearchAll">
     </PageSearch>
+    <!-- 操作区 -->
+    <pg-operations
+      slot="operations"
+      :btns="operations"
+      @sync="sync">
+    </pg-operations>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -17,6 +24,10 @@
       border
       fit
       highlight-current-row>
+      <el-table-column
+        type="selection"
+        width="55">
+      </el-table-column>
       <el-table-column :label="$t('table.code')" align="center" >
         <template slot-scope="scope">
           {{ scope.row.code }}
@@ -66,6 +77,14 @@ export default {
         keyword: '',
         searchType: 'code' // 下拉按钮组默认展示的选项
       },
+      operations: [
+        {
+          name: '同步',
+          action: 'sync',
+          type: '',
+          float: 'fl'
+        }
+      ], // 操作按钮
       pageIndex: 1, // 当前页数
       pageSize: 20, // 一页的总数据
       conditions: [], // 调用接口时传递的参数数组
@@ -163,7 +182,6 @@ export default {
     },
     // 清除单项
     cleanSearchItem(model) {
-      console.log('model', model)
       this.query[model] = cloneDeep(this.initQuery[model])
     },
     // 清除全部
@@ -181,6 +199,10 @@ export default {
     currentChange(current) {
       this.pageIndex = current
       this.update()
+    },
+    // 同步
+    sync() {
+      console.log(666)
     }
   }
 }

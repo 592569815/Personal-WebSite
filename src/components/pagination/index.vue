@@ -1,7 +1,17 @@
 <!-- 分页组件 -->
 <template>
   <div v-if="total > 0" :style="{'left': positionLeft + 'px'}" class="pagination_box">
-    <el-pagination :pager-count="pagerCount" :page-size="pageSize" :page-sizes="pageSizes" :total="total" :current-page="currentPage" layout="slot, prev" class="part_one br_n" size="mini" prev-text="上一页" @current-change="currentChange">
+    <el-pagination
+      :pager-count="pagerCount"
+      :page-size="pageSize"
+      :page-sizes="pageSizes"
+      :total="total"
+      :current-page="currentPage"
+      layout="slot, prev"
+      class="part_one br_n"
+      size="mini"
+      prev-text="上一页"
+      @current-change="currentChange">
       <div class="first_page">
         <select v-model="pageSizesVal" @change="sizeChange">
           <option v-for="item in pageSizes" :value="item" :key="item">
@@ -29,10 +39,9 @@
         <div class="empty"></div>
         <input v-model="toPage" type="text">
         <button @click="toTargetPage">go</button>
-        <div class="to_top">
+        <div class="to_top" @click="backTop">
           <svg-icon icon-class="goTop" />
         </div>
-        
       </div>
     </el-pagination>
   </div>
