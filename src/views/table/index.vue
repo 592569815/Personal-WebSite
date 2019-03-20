@@ -26,7 +26,11 @@
       highlight-current-row>
       <el-table-column
         type="selection"
-        width="55">
+        width="35">
+      </el-table-column>
+      <el-table-column
+        type="index"
+        width="50">
       </el-table-column>
       <el-table-column :label="$t('table.code')" align="center" >
         <template slot-scope="scope">

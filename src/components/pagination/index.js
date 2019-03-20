@@ -1,30 +1,42 @@
 import { mapGetters } from 'vuex'
+import { scrollTo } from '@/utils/scrollTo'
 
 export default {
   name: 'PgPagination',
   props: {
+    // 当前页，默认第一页
     currentPage: {
       type: Number,
       default: 1
     },
+    // 可配置一页数据量
     pageSizes: {
       type: Array,
       default() {
         return [20, 50, 100, 200]
       }
     },
+    // 默认一页20条数据
     pageSize: {
       type: Number,
       default: 20
     },
+    // 布局
     layout: {
       type: String,
       default: 'sizes, slot, prev, pager, next, slot, jumper'
     },
+    // 数据总数
     total: {
       type: Number,
       default: 0
     },
+    // 是否自动滚动到顶部 默认是
+    autoScroll: {
+      type: Boolean,
+      default: true
+    },
+    // 适应侧边栏
     positionData: {
       type: Object,
       default() {
@@ -34,12 +46,14 @@ export default {
         }
       }
     },
+    // 是否编辑页面
     isEditPage: {
       type: Boolean,
       default: false
     }
   },
   watch: {
+    // 监听侧边栏张开可关闭
     'sidebar.opened'(newVal) {
       if (newVal) {
         this.positionLeft = this.positionData.max
@@ -49,6 +63,7 @@ export default {
     }
   },
   computed: {
+    // 从vuex获取侧边栏状态
     ...mapGetters([
       'sidebar'
     ]),
@@ -77,6 +92,9 @@ export default {
     // 页码改变
     currentChange(currentPage) {
       this.$emit('current-change', currentPage)
+      if (this.autoScroll) {
+        scrollTo(0, 800)
+      }
     },
     // 页容量改变
     sizeChange($event) {
@@ -107,8 +125,7 @@ export default {
       if (this.isEditPage) {
         this.$emit('back-top')
       } else {
-        document.body.scrollTop = 0
-        document.documentElement.scrollTop = 0
+        scrollTo(0, 800)
       }
     }
   }
