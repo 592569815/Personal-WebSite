@@ -64,7 +64,10 @@ export default {
     theme: 'Theme',
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
-    externalLink: 'External Link'
+    externalLink: 'External Link',
+    test: 'Test',
+    component: 'Component',
+    utils: 'Utils'
   },
   navbar: {
     logOut: 'Log Out',

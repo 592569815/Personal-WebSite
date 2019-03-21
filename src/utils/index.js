@@ -3,6 +3,7 @@
  */
 
 export function parseTime(time, cFormat) {
+  console.log(arguments)
   if (arguments.length === 0) {
     return null
   }
@@ -30,6 +31,7 @@ export function parseTime(time, cFormat) {
   }
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
+    console.log(value)
     // Note: getDay() returns 0 on Sunday
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
     if (result.length > 0 && value < 10) {
@@ -37,12 +39,15 @@ export function parseTime(time, cFormat) {
     }
     return value || 0
   })
+  console.log(time_str)
   return time_str
 }
 
 export function formatTime(time, option) {
+  console.log(arguments)
   time = +time * 1000
   const d = new Date(time)
+  console.log('d', d)
   const now = Date.now()
 
   const diff = (now - d) / 1000
@@ -357,5 +362,27 @@ export function setValByKey(obj, keyString, val) {
         current = current[key]
       }
     })
+  }
+}
+
+/**
+ * 导出列表字段数据
+ * @param dataList {array} 目标数组
+ * @param field {string} 导出字段
+ */
+export function exportListData(dataList, field) {
+  let data = []
+  if (dataList.length > 0) {
+    dataList.forEach((item) => {
+      switch (typeof field) {
+        case 'string':
+          data.push(item[field] ? String(item[field]).trim() : '')
+          break
+        case 'function':
+          data = data.concat(field(dataList, item))
+          break
+      }
+    })
+    return data
   }
 }

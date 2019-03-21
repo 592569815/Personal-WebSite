@@ -64,7 +64,10 @@ export default {
     theme: '换肤',
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
-    externalLink: '外链'
+    externalLink: '外链',
+    test: '测试',
+    component: '组件测试',
+    utils: '工具函数测试'
   },
   navbar: {
     logOut: '退出登录',

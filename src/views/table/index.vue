@@ -15,7 +15,8 @@
     <pg-operations
       slot="operations"
       :btns="operations"
-      @sync="sync">
+      @sync="sync"
+      @exportCode="exportCode">
     </pg-operations>
     <el-table
       v-loading="listLoading"
@@ -23,7 +24,8 @@
       element-loading-text="Loading"
       border
       fit
-      highlight-current-row>
+      highlight-current-row
+      @selection-change="handleSelectionChange">
       <el-table-column
         type="selection"
         width="35">
@@ -57,12 +59,24 @@
       @size-change="sizeChange"
       @current-change="currentChange">
     </pg-pagination>
+    <!-- 弹框 -->
+    <el-dialog
+      :visible.sync="exportVisible"
+      title="导出数据">
+      <el-input
+        v-model="exportStr"
+        type="textarea"
+        autosize
+        placeholder="请输入内容">
+      </el-input>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getAllCountry } from '@/api/table'
 import { cloneDeep } from 'lodash'
+import { exportListData } from '@/utils'
 import Sticky from '@/components/Sticky'
 import waves from '@/directive/waves' // wave 指令
 
@@ -87,8 +101,17 @@ export default {
           action: 'sync',
           type: '',
           float: 'fl'
+        },
+        {
+          name: '导出',
+          action: 'exportCode',
+          type: '',
+          float: 'fr'
         }
       ], // 操作按钮
+      checkData: [], // 选中数据
+      exportVisible: false, // 导出弹框
+      exportData: [], // 导出数据
       pageIndex: 1, // 当前页数
       pageSize: 20, // 一页的总数据
       conditions: [], // 调用接口时传递的参数数组
@@ -126,6 +149,11 @@ export default {
             ]
           }
         ]
+      }
+    },
+    exportStr: {
+      get() {
+        return this.exportData.join(',')
       }
     }
   },
@@ -207,6 +235,15 @@ export default {
     // 同步
     sync() {
       console.log(666)
+    },
+    // 表格多选修改
+    handleSelectionChange(val) {
+      this.checkData = val
+    },
+    // 导出国家简码
+    exportCode() {
+      this.exportData = exportListData(this.checkData, 'code')
+      this.exportVisible = true
     }
   }
 }

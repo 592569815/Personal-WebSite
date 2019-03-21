@@ -178,5 +178,26 @@ export const asyncRouterMap = [
       }
     ]
   },
+  {
+    path: '/test',
+    component: Layout,
+    name: 'test',
+    meta: { title: 'test', icon: 'example' },
+    redirect: '/test/componentTest',
+    children: [
+      {
+        path: 'component',
+        component: () => import('@/views/test/componentTest/index'),
+        name: 'component-test',
+        meta: { title: 'component', icon: 'icon' }
+      },
+      {
+        path: 'utils',
+        component: () => import('@/views/test/utilsTest/index'),
+        name: 'utils-test',
+        meta: { title: 'utils', icon: 'icon' }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]

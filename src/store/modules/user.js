@@ -49,7 +49,6 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
-          console.log('token', data.token)
           commit('SET_TOKEN', data.token)
           commit('SET_USER', username)
           setToken(response.data.token)
@@ -65,7 +64,6 @@ const user = {
       console.log('userstate', state)
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
-          console.log('res', response.data)
           // 由于mockjs 不支持自定义状态码只能这样hack
           if (!response.data) {
             reject('Verification failed, please login again.')
