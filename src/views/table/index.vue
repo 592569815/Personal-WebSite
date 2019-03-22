@@ -62,7 +62,7 @@
     <!-- 弹框 -->
     <el-dialog
       :visible.sync="exportVisible"
-      title="导出数据">
+      :title="$t('dialog.export')">
       <el-input
         v-model="exportStr"
         type="textarea"
@@ -95,20 +95,6 @@ export default {
         keyword: '',
         searchType: 'code' // 下拉按钮组默认展示的选项
       },
-      operations: [
-        {
-          name: '同步',
-          action: 'sync',
-          type: '',
-          float: 'fl'
-        },
-        {
-          name: '导出',
-          action: 'exportCode',
-          type: '',
-          float: 'fr'
-        }
-      ], // 操作按钮
       checkData: [], // 选中数据
       exportVisible: false, // 导出弹框
       exportData: [], // 导出数据
@@ -130,23 +116,42 @@ export default {
             text: 'text',
             value: 'value',
             selectModel: 'searchType',
-            selectLabel: '搜索类型',
+            selectLabel: this.$t('table.searchType'),
             inputModel: 'keyword',
-            inputLabel: '关键字',
+            inputLabel: this.$t('table.keyword'),
             options: [
               {
                 value: 'code',
-                text: '国家简码'
+                text: this.$t('table.code')
               },
               {
                 value: 'countryEn',
-                text: '国家名称(英)'
+                text: this.$t('table.en')
               },
               {
                 value: 'countryCn',
-                text: '国家名称(中)'
+                text: this.$t('table.cn')
               }
             ]
+          }
+        ]
+      }
+    },
+    // 配置操作按钮
+    operations: {
+      get() {
+        return [
+          {
+            name: this.$t('btn.sync'),
+            action: 'sync',
+            type: '',
+            float: 'fl'
+          },
+          {
+            name: this.$t('btn.export'),
+            action: 'exportCode',
+            type: '',
+            float: 'fr'
           }
         ]
       }
@@ -234,7 +239,7 @@ export default {
     },
     // 同步
     sync() {
-      console.log(666)
+      console.log(777)
     },
     // 表格多选修改
     handleSelectionChange(val) {
@@ -242,8 +247,16 @@ export default {
     },
     // 导出国家简码
     exportCode() {
-      this.exportData = exportListData(this.checkData, 'code')
-      this.exportVisible = true
+      if (this.checkData.length > 0) {
+        this.exportData = exportListData(this.checkData, 'code')
+        this.exportVisible = true
+      } else {
+        this.$message({
+          message: this.$t('tip.leastOne'),
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
     }
   }
 }

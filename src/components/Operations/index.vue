@@ -24,7 +24,7 @@
         v-waves
         v-if="!btn.type"
         :key="btn.name"
-        :style="{width: btn.width+'px'}"
+        :style="{ width: btn.width + 'px' }"
         :type="btn.type"
         :class="btn.float"
         size="mini"

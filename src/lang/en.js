@@ -134,7 +134,9 @@ export default {
     confirm: 'Confirm',
     en: 'EnglishName',
     cn: 'ChineseName',
-    code: 'CountryCode'
+    code: 'CountryCode',
+    keyword: 'Keyword',
+    searchType: 'SearchType'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',
@@ -165,6 +167,16 @@ export default {
     closeAll: 'Close All'
   },
   tip: {
-    switchLangSuccess: 'Switch Language Success'
+    switchLangSuccess: 'Switch Language Success',
+    leastOne: 'Please choose at least one'
+  },
+  btn: {
+    sync: 'Sync',
+    export: 'Export',
+    search: 'Search',
+    clearAll: 'Clear all'
+  },
+  dialog: {
+    export: 'Export Data'
   }
 }

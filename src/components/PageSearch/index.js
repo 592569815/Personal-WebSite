@@ -336,11 +336,11 @@ export default {
       <div class='search_component' on-keyup = { this.handleKeyUp }>
         <div class='default_condition'>
           { formRender(this.form, this.defaultForm) }
-          <el-button size = 'mini' type = 'primary' class = 'search_btn' nativeOn-click = { () => this.request(null) }>搜索</el-button>
+          <el-button size = 'mini' type = 'primary' class = 'search_btn' nativeOn-click = { () => this.request(null) }>{ this.$t('btn.search') }</el-button>
         </div>
         <div class = 'selected_condition' v-show = { this.serchInfoArr.length > 0 }>
           { searchItemRender() }
-          <a href='javascript:;' class='cleanAll' on-click = { () => this.closeAll() }>清除全部</a>
+          <a href='javascript:;' class='cleanAll' on-click = { () => this.closeAll() }>{ this.$t('btn.clearAll') }</a>
         </div>
       </div>
     )

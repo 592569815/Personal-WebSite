@@ -43,7 +43,7 @@
       </el-button>
 
       <div style="position:relative">
-        <div class="tips">
+        <!-- <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
@@ -52,11 +52,11 @@
             {{ $t('login.username') }} : editor
           </span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div>
+        </div> -->
 
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
+        <!-- <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
-        </el-button>
+        </el-button> -->
       </div>
     </el-form>
 
@@ -201,6 +201,7 @@ export default {
         height: 47px;
         caret-color: $cursor;
         &:-webkit-autofill {
+          box-shadow: 0 0 0px 1000px $bg inset !important;
           -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
           -webkit-text-fill-color: $cursor !important;
         }

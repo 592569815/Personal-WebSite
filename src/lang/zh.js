@@ -134,7 +134,9 @@ export default {
     confirm: '确 定',
     en: '国家名称(英)',
     cn: '国家名称(中)',
-    code: '国家简码'
+    code: '国家简码',
+    keyword: '关键字',
+    searchType: '搜索类型'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -165,6 +167,16 @@ export default {
     closeAll: '关闭所有'
   },
   tip: {
-    switchLangSuccess: '切换语言成功'
+    switchLangSuccess: '切换语言成功',
+    leastOne: '请至少选择一项'
+  },
+  btn: {
+    sync: '同步',
+    export: '导出',
+    search: '搜索',
+    clearAll: '清除全部'
+  },
+  dialog: {
+    export: '导出数据'
   }
 }

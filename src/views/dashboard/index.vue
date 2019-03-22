@@ -15,6 +15,9 @@ export default {
       'name',
       'roles'
     ])
+  },
+  created() {
+    console.log(this.$t('route.directivePermission'))
   }
 }
 </script>
