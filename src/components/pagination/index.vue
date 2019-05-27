@@ -48,6 +48,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/variables.scss';
 /*分页组件开始*/
 .pagination_box {
   position: fixed;
