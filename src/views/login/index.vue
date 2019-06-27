@@ -1,13 +1,14 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+      <!-- 系统登录 -->
       <div class="title-container">
         <h3 class="title">
           {{ $t('login.title') }}
         </h3>
         <lang-select class="set-language" />
       </div>
-
+      <!-- 用户名输入框 -->
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -20,7 +21,7 @@
           auto-complete="on"
         />
       </el-form-item>
-
+      <!-- 密码框 -->
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
@@ -37,13 +38,13 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-
+      <!-- 登录按钮 -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
         {{ $t('login.logIn') }}
       </el-button>
-
-      <div style="position:relative">
-        <!-- <div class="tips">
+      <!-- 第三方登录 -->
+      <!-- <div style="position:relative">
+        <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
@@ -52,14 +53,13 @@
             {{ $t('login.username') }} : editor
           </span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div> -->
-
-        <!-- <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
+        </div>
+        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
-        </el-button> -->
-      </div>
+        </el-button>
+      </div> -->
     </el-form>
-
+    <!-- 第三方登录弹框 -->
     <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
       {{ $t('login.thirdpartyTips') }}
       <br>
@@ -81,14 +81,14 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error(this.$t('tip.checkUsername')))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error(this.$t('tip.checkPassword')))
       } else {
         callback()
       }
@@ -96,7 +96,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

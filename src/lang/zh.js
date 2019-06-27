@@ -168,7 +168,9 @@ export default {
   },
   tip: {
     switchLangSuccess: '切换语言成功',
-    leastOne: '请至少选择一项'
+    leastOne: '请至少选择一项',
+    checkUsername: '请输入正确的用户名',
+    checkPassword: '密码不能少于6位字符'
   },
   btn: {
     sync: '同步',

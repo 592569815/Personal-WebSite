@@ -8,7 +8,7 @@ const user = {
     code: '',
     token: getToken(),
     name: '',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
+    avatar: '',
     roles: [],
     setting: {
       articlePlatform: []
@@ -16,12 +16,14 @@ const user = {
   },
 
   mutations: {
+    // 设置用户名
     SET_USER: (state, user) => {
       state.user = user
     },
     SET_CODE: (state, code) => {
       state.code = code
     },
+    // 设置token
     SET_TOKEN: (state, token) => {
       state.token = token
     },

@@ -3,17 +3,19 @@ import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// create an axios instance
+// 创建一个axios实例
 const service = axios.create({
-  // baseURL: 'http://localhost:7001/', // 本地 的 base_url
-  baseURL: 'http://155.138.208.180:7001/', // 本地 的 base_url
-  timeout: 5000 // request timeout
+  baseURL: 'http://localhost:7001/', // 本地 的 base_url
+  // baseURL: 'http://155.138.208.180:7001/', // 服务器 的 base_url
+  timeout: 5000 // 请求的超时时间
 })
 
-// request interceptor
+// axios.defaults.withCredentials = true
+
+// 请求拦截器
 service.interceptors.request.use(
   config => {
-    // Do something before request is sent
+    // 在发送请求之前做点什么
     if (store.getters.token) {
       // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
       config.headers['X-Token'] = getToken()
@@ -21,13 +23,13 @@ service.interceptors.request.use(
     return config
   },
   error => {
-    // Do something with request error
+    // 处理请求错误
     console.log(error) // for debug
     Promise.reject(error)
   }
 )
 
-// response interceptor
+// 响应拦截器
 service.interceptors.response.use(
   // response => response.data,
   /**
@@ -66,7 +68,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
     Message({
-      message: error.msg,
+      message: error,
       type: 'error',
       duration: 5 * 1000
     })

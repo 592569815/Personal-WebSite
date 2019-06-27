@@ -146,6 +146,21 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
+    path: '/InboundShipment',
+    component: Layout,
+    redirect: '/InboundShipment/FBAInboundList',
+    name: 'InboundShipment',
+    meta: { title: 'InboundShipment', icon: 'example'},
+    children: [
+      { 
+        path: 'FBAInboundList', 
+        name: 'FBAInboundList', 
+        component: () => import('@/views/InboundShipment/FBAInboundList'), 
+        meta: { title: 'FBAInboundList', icon: 'table', roles: ['admin']}
+      }
+    ]
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

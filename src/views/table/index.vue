@@ -19,6 +19,7 @@
       @exportCode="exportCode">
     </pg-operations>
     <el-table
+      style="padding-bottom: 30px"
       v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"

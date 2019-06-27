@@ -168,7 +168,9 @@ export default {
   },
   tip: {
     switchLangSuccess: 'Switch Language Success',
-    leastOne: 'Please choose at least one'
+    leastOne: 'Please choose at least one',
+    checkName: 'Please enter the correct user name',
+    checkpassword: 'The password can not be less than 6 digits'
   },
   btn: {
     sync: 'Sync',

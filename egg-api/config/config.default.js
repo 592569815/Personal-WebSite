@@ -1,6 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
+const path = require('path')
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -49,7 +50,7 @@ module.exports = appInfo => {
     renew: true,
   };
   config.security = {
-    domainWhiteList: [ 'http://localhost:9528' ],
+    domainWhiteList: [ 'http://localhost:9528','http://192.168.1.58:8007' ],
     xframe: {
       enable: false,
     },
