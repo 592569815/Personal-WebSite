@@ -13,15 +13,15 @@ module.exports = appInfo => {
    **/
   const config = {};
   config.erpToken = 'admin';
-  config.redis = {
-    client: {
-      port: 6379,
-      password: '',
-      host: '127.0.0.1',
-      db: 0
-    },
-    agent: true
-  };
+  // config.redis = {
+  //   client: {
+  //     port: 6379,
+  //     password: '',
+  //     host: '127.0.0.1',
+  //     db: 0
+  //   },
+  //   agent: true
+  // };
   config.sequelize = {
     dialect: 'mysql',
     database: 'test', // 
@@ -45,7 +45,7 @@ module.exports = appInfo => {
       insecureAuth: true, 
     },
   };
-  config.sessionRedis = {};
+  // config.sessionRedis = {};
   config.session = {
     renew: true,
   };

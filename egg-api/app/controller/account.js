@@ -32,7 +32,7 @@ class AccountController extends Controller {
             user = JSON.parse(JSON.stringify(user));
             user.token = user.roles;
             await ctx.login(JSON.parse(JSON.stringify(user)));
-            await app.redis.setex("user:" + user.id, 60 * 60 * 24, ctx.session._sessCtx.externalKey);
+            // await app.redis.setex("user:" + user.id, 60 * 60 * 24, ctx.session._sessCtx.externalKey);
             ctx.session.maxAge = ms('2h');
             delete user.password;
             ctx.formatResponse.body = user;

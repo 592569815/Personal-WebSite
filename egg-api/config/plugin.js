@@ -12,11 +12,11 @@ module.exports = {
     package: 'egg-sequelize',
   },
   sessionRedis: {
-    enable: true,
+    enable: false,
     package: 'egg-session-redis',
   },
   redis: {
-    enable: true,
+    enable: false,
     package: 'egg-redis',
   },
   cors: {

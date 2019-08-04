@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    {{message}}
+    {{ message }}
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/InboundShipment'
-export default {
+export default{
   name: 'FBAInboundList',
   data() {
     return {
@@ -41,4 +41,3 @@ export default {
 <style lang="scss" scoped>
 
 </style>
-
